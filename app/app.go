@@ -21,6 +21,8 @@ func RunApp() {
 		log.Fatal(err)
 	}
 
+	config.StartConnectingRedis()
+
 	err = config.MigrateModel(config.DBConnection, setup.GetListModel()...)
 	if err != nil {
 		log.Fatal(err)

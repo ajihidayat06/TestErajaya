@@ -15,7 +15,8 @@ func NewProductRouter(productUseCase *usecase.ProductUseCase) ProductRouter {
 	return ProductRouter{ProductUseCase: *productUseCase}
 }
 
-func (r *ProductRouter) Route(app *fiber.App) {
+func (r *ProductRouter) Route(app *fiber.App, authMiddleware func(ctx *fiber.Ctx) error) {
+	app.Use(authMiddleware)
 	app.Post("/api/product", r.InsertProduct)
 	app.Get("/api/product", r.GetAll)
 }
